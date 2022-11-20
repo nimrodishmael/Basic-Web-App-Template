@@ -7,11 +7,11 @@ function main() {
     // Toggle
     var status = 0;
     if ($(this).find(".title").hasClass("selected")) {
-      $(this).find(".title").removeClass('selected');
+      $(this).find(".title").removeClass("selected");
       status = 0;
     }
     else {
-      $(this).find(".title").addClass('selected');
+      $(this).find(".title").addClass("selected");
       status = 1;
     }
 
