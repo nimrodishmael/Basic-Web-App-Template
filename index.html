@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Web App</title>
+  <link rel="icon" href="favicon.png"/>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<body>
+  <div>
+    <h2 id="title" align="center"><span class="title">Web App</span></h2>
+  </div>
+
+  <!-- Login -->
+  <div class="login">
+    <h1>Login</h1>
+    <form action="/api/login" method="post">
+      <label for="email">
+        <i class="fas fa-user"></i>
+      </label>
+      <input type="text" name="email" placeholder="Email" id="email" required>
+      <label for="password">
+        <i class="fas fa-lock"></i>
+      </label>
+      <input type="password" name="password" placeholder="Password" id="password" required>
+      <input type="submit" value="Login">
+    </form>
+  </div>
+
+</body>
+
+<!-- Javascript -->
+<script src="js/jquery-3.6.1.min.js"></script>
+<script src="js/main.js"></script>
+
+</html>
