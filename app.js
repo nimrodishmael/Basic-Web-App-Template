@@ -107,14 +107,14 @@ function runApp(app) {
         }
     });
 
-    // Create database
+    // Load database
     var db = new sqlite.Database(DB, (err) => {
         if (err) {
           console.error(err.message)
           throw err
         } 
         else {
-            // Create databse
+            // Create database
             var salt = bcrypt.genSaltSync(10);
             db.run(`CREATE TABLE users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
