@@ -5,10 +5,10 @@ var tokens = require('jsonwebtoken');
 var bcrypt = require('bcryptjs');
 
 // Database
-const DB = "teleport.db"
+const DB = "database.db"
 
-// Init login system
-function initLogin(app) {
+// Run app
+function runApp(app) {
     // Test
     app.all("/api/test", (req, res) => {
         res.status(200).json({"response": "ok"});
@@ -16,33 +16,28 @@ function initLogin(app) {
 
     // Load
     app.all("/api/load", (req, res) => {
-        var query = "SELECT * FROM Times"
-        var params = []
+        const query = "SELECT * FROM Data";
+        const params = [];
         db.all(query, params, (err, rows) => {
             if (err) return res.status(400).json({"error": err.message});
             res.json({
                 "response": "ok",
                 "data": rows
-            })
+            });
           });
     });
 
     // Save
     app.all('/api/save', (req, res) => {
-        var email = "hats";
-        var time = Date('now');
-        var available = "1";
-        var salt = bcrypt.genSaltSync(10);
-        const query = 'INSERT INTO Times (email, time, available) VALUES (?, ?, ?)';
-        db.run(query, [email, time, available]);
+        const {email, status} = req.body;
+        const query = 'INSERT INTO Data (email, status) VALUES (?, ?)';
+        db.run(query, [email, status]);
         res.send({"response": "ok"});
     });
 
     // Sign up
     app.all("/api/signup", async (req, res) => {
         // Check for email and password
-        req.body.email = "hats";
-        req.body.password = "yes";
         const {email, password} = req.body;
         console.log("Sign up: " + email);
         if (!(email && password)) return res.status(400).json({"error": "Email and password required to sign up."});
@@ -76,16 +71,21 @@ function initLogin(app) {
             let userOutput = {};
             var query = "SELECT * FROM Users WHERE email = ?";
             db.all(query, email, function(err, rows) {
+                // Check error
                 if (err) return res.status(400).json({"error": err.message});
                 rows.forEach(function (row) { user.push(row); });
 
-                // Found?
+                // Find user
                 if (rows.length == 0) return res.status(400).json({"error": "No user with that email found."});
-                
+
                 // Check password
                 var passwordHash = bcrypt.hashSync(password, user[0].salt);
                 if (passwordHash === user[0].password) {
-                    // Create token
+                    // Create login token
+                    if (!process.env.TOKEN_KEY) { 
+                        console.log(".env file missing"); 
+                        return res.status(400).json({"error": "Server .env file token key missing."});
+                    }
                     const token = tokens.sign(
                         {user_id: user[0].id, username: user[0].username, email},
                         process.env.TOKEN_KEY,
@@ -134,25 +134,17 @@ function initLogin(app) {
                     console.log("Created database.");
                     var insert = 'INSERT INTO users (username, email, password, salt, created) VALUES (?, ?, ?, ?, ?)';
                     db.run(insert, ["user1", "user1@example.com", bcrypt.hashSync("user1", salt), salt, Date('now')]);
+
+                    // Create table
+                    db.run('CREATE TABLE IF NOT EXISTS Data (id INTEGER PRIMARY KEY AUTOINCREMENT, email text, status text)');
                 }
             });
 
-            // Create times
-            db.serialize(() => {
-                // Create table
-                db.run('CREATE TABLE IF NOT EXISTS Times (id INTEGER PRIMARY KEY AUTOINCREMENT, email text, time date, available text)');
-
-                // List users
-                db.each("SELECT id, email FROM Users", (err, row) => {
-                    if (!err) console.log("User " + row.id + ": " + row.email);
-                });
-
-                // List times
-                db.each("SELECT id, email, time, available FROM Times", (err, row) => {
-                    if (!err) console.log(row.id + ": " + row.email + " " + row.time + " available: " + row.available);
-                });
+            // List users
+            db.each("SELECT id, email FROM Users", (err, row) => {
+                if (!err) console.log("User " + row.id + ": " + row.email);
             });
         }
     });
 }
-module.exports = initLogin;
+module.exports = runApp;
