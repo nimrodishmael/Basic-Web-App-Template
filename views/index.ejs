@@ -1,20 +1,9 @@
-<!DOCTYPE html>
-<html>
+<!-- index.ejs -->
 
-<head>
-  <title>Web App</title>
-  <link rel="icon" href="favicon.png"/>
-  <link rel="stylesheet" href="css/bootstrap.min.css" />
-  <link rel="stylesheet" href="css/main.css" />
-</head>
-
-<body>
-  <!-- Title -->
-  <div>
-    <h2 id="title" align="center"><span class="title">Web App</span></h2>
-  </div>
+<%- include ('header') -%>
 
   <!-- Login -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
   <div class="login">
     <h1>Login</h1>
     <form action="/api/login" method="post">
@@ -29,10 +18,7 @@
       <input type="submit" value="Login">
     </form>
   </div>
-</body>
 
-<!-- Javascript -->
-<script src="js/jquery-3.6.1.min.js"></script>
-<script src="js/main.js"></script>
+<%- include ('footer') -%>
 
-</html>
+
