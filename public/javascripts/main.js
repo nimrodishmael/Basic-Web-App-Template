@@ -6,12 +6,14 @@ function main() {
   var statusDiv = $("#status");
 
   // Load
-  $.getJSON("api/load", {})
-  .done(function(response) {
-    $.each(response.data, function(id, row) {
-      setStatus(statusDiv, row.status);
+  if (statusDiv.length && username != "") {
+    $.getJSON("api/load", {}).done(function(response) {
+      if (response.data.length == 0) setStatus(statusDiv, "Unknown");
+      else $.each(response.data, function(id, row) {
+        setStatus(statusDiv, row.status);
+      });
     });
-  });
+  }
 
   // Handle clicks
   statusDiv.click(function() {

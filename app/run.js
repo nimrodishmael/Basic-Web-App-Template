@@ -12,6 +12,7 @@ function runApp(app) {
     app.all("/api/load", (req, res) => {
         try {
             // Query data owned by this user
+            if (!req.user) res.send({"response": "not logged in"});
             var query = "SELECT * FROM data WHERE owner_id == ?";
             var owner_id = req.user.id;
             var params = [owner_id];
@@ -42,6 +43,7 @@ function runApp(app) {
     // Save
     app.all('/api/save', (req, res) => {
         try {
+            if (!req.user) res.send({"response": "not logged in"});
             var owner_id = req.user.id;
             var email = req.user.username;
             var status = req.query.status;
