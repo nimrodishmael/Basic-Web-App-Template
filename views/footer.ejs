@@ -1,8 +1,8 @@
 
 <!-- Javascript -->
 <script>
-var username = "<%= user.username %>";
-var userid = "<%= user.id %>";
+var username = "<% if (typeof user != 'undefined') user.username %>";
+var userid = "<% if (typeof user != 'undefined') user.id %>";
 </script>
 
 <script src="javascripts/jquery-3.6.1.min.js"></script>
