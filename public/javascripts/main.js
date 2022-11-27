@@ -2,26 +2,41 @@
 
 function main() {
 
+  // Status div
+  var statusDiv = $("#status");
+
+  // Load
+  $.getJSON("api/load", {})
+  .done(function(response) {
+    $.each(response.data, function(id, row) {
+      setStatus(statusDiv, row.status);
+    });
+  });
+
   // Handle clicks
-  $("#title").click(function() {
+  statusDiv.click(function() {
     // Toggle
-    var status = 0;
-    if ($(this).find(".title").hasClass("selected")) {
-      $(this).find(".title").removeClass("selected");
-      status = 0;
-    }
-    else {
-      $(this).find(".title").addClass("selected");
-      status = 1;
-    }
+    var status;
+    statusDiv = $(this);
+    if (statusDiv.hasClass("selected")) status = "Bad";
+    else status = "Good";
+    setStatus(statusDiv, status);
 
     // Save
     $.getJSON("api/save", {"status": status}).done(function(data) {
-        console.log(data);
+        //console.log(data);
       });
   });
 }
 
+// Set status
+function setStatus(statusDiv, status) {
+  if (status == "Good") statusDiv.addClass("selected");
+  else statusDiv.removeClass("selected");
+  statusDiv.html(status);
+}
+
+// Run on page load
 $(function() {
     main();
 });

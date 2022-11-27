@@ -2,9 +2,11 @@ body {
   font-family: sans-serif;
 }
 
-video {
-  max-width: 100%;
-  width: 320px;
+#status:not(.selected) {
+    background: #f4806e;    
+}
+.selected {
+    background: #9ee440;
 }
 
 /* Navigation */
