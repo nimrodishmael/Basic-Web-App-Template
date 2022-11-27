@@ -1,4 +1,4 @@
-// database.js: Creates and manages the database
+// database.js: Creates and manages the database.
 
 // Imports
 var sqlite3 = require('sqlite3');

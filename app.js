@@ -1,4 +1,4 @@
-// app.js: The main web app file.
+// app.js: The server side starting point.
 
 // Server port
 const PORT = 3000;

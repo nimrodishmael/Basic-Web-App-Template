@@ -1,3 +1,5 @@
+// run.js: Runs the main web app server API.
+
 // Database
 var database = require('../database.js');
 

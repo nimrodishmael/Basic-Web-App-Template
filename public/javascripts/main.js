@@ -1,7 +1,6 @@
-'use strict';
+// main.js: The main browser side code.
 
 function main() {
-
   // Status div
   var statusDiv = $("#status");
 

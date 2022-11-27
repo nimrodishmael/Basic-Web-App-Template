@@ -1,4 +1,4 @@
-// index.js: The main routes for the web app
+// index.js: The server routes for pages.
 
 // Imports
 var express = require('express');

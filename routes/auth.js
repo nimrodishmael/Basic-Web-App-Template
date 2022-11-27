@@ -1,4 +1,4 @@
-// auth.js: User authentication
+// auth.js: User authentication.
 
 // Imports
 var express = require('express');
