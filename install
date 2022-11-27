@@ -1,2 +1,1 @@
-npm install cookie-parser body-parser comment-json passport-local express-session ejs nodemon
-npm install
+npm install nodemon ejs body-parser passport passport-local express-session connect-ensure-login connect-sqlite3 csurf

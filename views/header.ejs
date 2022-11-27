@@ -12,30 +12,39 @@
 
 <body>
 
-<nav class="navbar navbar-expand">
+<nav class="navbar-expand">
 
-<div class="" id="navbarSupportedContent">
-<ul class="navbar-nav mr-auto">
+<div class="nav">
 
-<h2 style="padding-right:20px">Web App</h2>
+<ul class="navbar-nav">
 
-<li class="nav-item">
-<a class="nav-link" href="/"><b>Home</b></a>
+<li>
+<h4>App</h4>
 </li>
 
-<li class="nav-item">
-<a class="nav-link" href="/next"><b>Next</b></a>
-</li>
+<% if (typeof user != 'undefined') { %>
 
 <li class="nav-item">
-<a class="nav-link" href="/about"><b>About</b></a>
-</li>            
+<a class="nav-link" href="/home"><b>Home</b></a>
+</li>
+
+<!-- Email -->
+<li class="nav-item right">
+<a class="nav-link" href="/account"><b><%= user.username %></b></a>
+</li>
+
+<% } else { %>
+
+<!-- Log in -->
+<li class="nav-item right">
+<a class="nav-link" href="/login"><b>Log in</b></a>
+
+<!-- Sign up -->
+<a class="nav-link" href="/signup"><b>Sign up</b></a>
+</li>
+
+<% } %>
 
 </ul>
 </div>
-
 </nav>
-
-<br/>
-
-
