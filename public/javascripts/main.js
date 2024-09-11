@@ -13,7 +13,12 @@ function main() {
       });
     });
   }
-
+  document.getElementById('role').addEventListener('change', function() {
+    var role = this.value;
+    document.getElementById('projects-group').style.display = (role === 'Data Manager') ? 'block' : 'none';
+    document.getElementById('community-group').style.display = (role === 'Enumerator') ? 'block' : 'none';
+  });
+  
   // Handle clicks
   statusDiv.click(function() {
     // Toggle

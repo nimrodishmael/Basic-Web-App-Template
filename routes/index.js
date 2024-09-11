@@ -1,33 +1,26 @@
-// index.js: The server routes for pages.
+// index.js
+const express = require('express');
+const ensureLogIn = require('connect-ensure-login').ensureLoggedIn;
 
-// Imports
-var express = require('express');
-var ensureLogIn = require('connect-ensure-login').ensureLoggedIn;
-var database = require('../database.js');
+const router = express.Router();
+const ensureLoggedIn = ensureLogIn();
 
-// Ensure logged in
-var ensureLoggedIn = ensureLogIn();
-
-// Load page
-function load(req, res, next) {
-  res.locals.variable = "";
-  next();
-}
-
-// Routes
-var router = express.Router();
-router.get('/', function(req, res, next) {
-  if (!req.user) { return res.render('index'); }
-  next();
-}, load, function(req, res, next) {
-  res.redirect('/home');
-});
-router.get('/account', ensureLoggedIn, load, function(req, res, next) {
-  res.render('account', { user: req.user });
-});
-router.get('/home', ensureLoggedIn, load, function(req, res, next) {
-  res.render('home', { user: req.user });
+// Redirect root to the home page after login
+router.get('/', function (req, res, next) {
+    if (!req.user) {
+        return res.render('index');
+    }
+    res.redirect('/home');
 });
 
-// Export
+// Home route
+router.get('/home', ensureLoggedIn, function (req, res) {
+    res.render('home', { user: req.user });
+});
+
+// Dashboard route (Placeholder for now)
+router.get('/dashboard', ensureLoggedIn, function (req, res) {
+    res.render('dashboard', { user: req.user });
+});
+
 module.exports = router;

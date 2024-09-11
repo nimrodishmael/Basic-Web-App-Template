@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Web App</title>
+  <title>COMMUNITY CORAL REEF MONITORING PORTAL</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="images/favicon.png" type="image/png"/>
@@ -11,22 +11,37 @@
 </head>
 
 <body>
-
+  <header style="display: flex; align-items: center; padding: 10px; background-color: #00adf1;">
+    <img src="/images/logo.png" alt="Logo" style="height: 50px; margin-right: 15px;">
+    <h4 style="margin: 0; font-size: 24px;">COMMUNITY CORAL REEF MONITORING PORTAL</h4>
+  </header>
 <nav class="navbar-expand">
 
 <div class="nav">
 
 <ul class="navbar-nav">
 
-<li>
-<h4>App</h4>
-</li>
-
+  
+  
+  
 <% if (typeof user != 'undefined') { %>
 
 <li class="nav-item">
 <a class="nav-link" href="/home"><b>Home</b></a>
 </li>
+
+<li class="nav-item">
+<a class="nav-link" href="/views/account"><b>AddUsers</b></a>
+</li>
+
+<li class="nav-item">
+  <a class="nav-link" href="/dashboard"><b>DataForms</b></a>
+  </li>
+
+<li class="nav-item">
+<a class="nav-link" href="/dashboard"><b>Dashboard</b></a>
+</li>
+
 
 <!-- Email -->
 <li class="nav-item right">
@@ -40,7 +55,7 @@
 <a class="nav-link" href="/login"><b>Log in</b></a>
 
 <!-- Sign up -->
-<a class="nav-link" href="/signup"><b>Sign up</b></a>
+<!-- a class="nav-link" href="/signup"><b>Sign up</b></a-->
 </li>
 
 <% } %>

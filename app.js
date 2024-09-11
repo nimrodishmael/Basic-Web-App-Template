@@ -3,6 +3,10 @@
 // Server port
 const PORT = 3000;
 
+
+// Import the admin route
+const adminRouter = require('./routes/admin');
+
 // Imports
 var express = require('express');
 var http = require('http');
@@ -55,6 +59,7 @@ app.use(function(req, res, next) {
 // Routes
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/auth'));
+app.use('/', adminRouter);
 
 // Init
 runApp(app);

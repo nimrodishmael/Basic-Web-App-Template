@@ -1,16 +1,44 @@
-<%- include ('header') -%>
+<%- include('header') -%>
 
+<br><br>
 <center>
-<h4>Account</h4>
-<p>
-
-<!-- Log out -->
-  <form action="/logout" method="post">
-    <a class="nav-link" href="/logout" class="logout" type="submit"><b>Log out</b></a>
-    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-  </form>
-
-</p>
+    <form action="/add-user" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <label for="role">Role:</label>
+            <select class="form-control" id="role" name="role" required>
+                <option value="Super User">Super User</option>
+                <option value="Data Manager">Data Manager</option>
+                <option value="Enumerator">Enumerator</option>
+            </select>
+        </div>
+        <div class="form-group" id="projects-group" style="display: none;">
+            <label for="projects">Projects:</label>
+            <select multiple class="form-control" id="projects" name="projects">
+                <option value="BAF - WWF">BAF - WWF</option>
+                <option value="IKI - GIZ">IKI - GIZ</option>
+            </select>
+        </div>
+        <div class="form-group" id="community-group" style="display: none;">
+            <label for="community">Community:</label>
+            <select class="form-control" id="community" name="community">
+                <option value="Kuruwitu">Kuruwitu</option>
+                <option value="Munje">Munje</option>
+                <option value="Tanga">Tanga</option>
+                <option value="Pemba">Pemba</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add User</button>
+    </form>
 </center>
 
-<%- include ('footer') -%>
+<%- include('footer') -%>
+

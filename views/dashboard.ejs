@@ -1,0 +1,18 @@
+<%- include('header') -%>
+
+<div class="container">
+    <h2>Dashboard</h2>
+    
+
+    <% if (user.role === 'Data Manager') { %>
+        <h3>Projects</h3>
+        <!-- Code to display Data Manager's projects -->
+    <% } else if (user.role === 'Enumerator') { %>
+        <h3>Community Data</h3>
+        <!-- Code to display Enumerator's community data -->
+    <% } else { %>
+        <p>You do not have permission to view this content.</p>
+    <% } %>
+</div>
+
+<%- include('footer') -%>
